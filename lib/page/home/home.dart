@@ -3,7 +3,12 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 // StatelessWidget은 변화지 않는 화면을 작업할 때 사용.
 // 변화는 화면을 작업 하고싶을 경우에는 StatefulWidget을 사용.
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
   // MaterialApp = 앱으로서 기능을 할 수 있도록 도와주는 뼈대
   @override
   Widget build(BuildContext context) {
@@ -23,10 +28,13 @@ class Home extends StatelessWidget {
 }
 
 // 앱이 실행 될때 표시할 화면의 함수
-class MyWidget extends StatelessWidget {
-  // scaffold = 구성된 앱에서 디자인적인 부분을 도와주는 뼈대
+class MyWidget extends StatefulWidget {
+  @override
+  State<MyWidget> createState() => _MyWidgetState();
+}
 
-  // 화면 구성
+class _MyWidgetState extends State<MyWidget> {
+  // scaffold = 구성된 앱에서 디자인적인 부분을 도와주는 뼈대
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -39,8 +47,12 @@ class MyWidget extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Image(width: 200.0, image: AssetImage("imgs/umul.png")),
-                Image(width: 200.0, image: AssetImage("imgs/umul.png"))
+                Image(width: 30.0, image: AssetImage("imgs/umul_logo.png")),
+                IconButton(
+                    onPressed: () {},
+                    icon: Icon(Icons.add_alert_rounded),
+                    color: const Color(0xff00c7ff),
+                    iconSize: 40.0)
               ],
             ),
             SizedBox(height: 50),
@@ -76,8 +88,11 @@ class MyWidget extends StatelessWidget {
             SizedBox(height: 50),
             Column(children: [
               IconButton(
-                  onPressed: () {}, icon: Icon(Icons.add), iconSize: 80.0),
-              Text("식사 시작")
+                  onPressed: () {},
+                  icon: Icon(Icons.play_arrow_rounded),
+                  color: const Color(0xff00c7ff),
+                  iconSize: 80.0),
+              Text("식사 시작", style: TextStyle(color: const Color(0xff00c7ff)))
             ]),
             SizedBox(height: 50)
           ],

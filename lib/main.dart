@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:capstone_design_flutter/page/home.dart';
+import 'package:capstone_design_flutter/page/home/home.dart';
+import 'package:capstone_design_flutter/page/report/report.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +18,7 @@ class _MyAppState extends State<MyApp> {
 
   final List<Widget> _widgetOptions = <Widget>[
     Home(),
-    Text('리포트'),
+    report_page(),
     Text('마이 페이지')
   ];
 
@@ -30,7 +31,6 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.blue,
       ),
       home: Scaffold(
-
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: _selectedIndex,
             unselectedItemColor: Colors.grey,
