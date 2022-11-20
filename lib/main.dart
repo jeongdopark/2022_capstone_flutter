@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:capstone_design_flutter/page/home/home.dart';
 import 'package:capstone_design_flutter/page/report/report.dart';
+import 'package:capstone_design_flutter/page/test/test.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +20,8 @@ class _MyAppState extends State<MyApp> {
   final List<Widget> _widgetOptions = <Widget>[
     Home(),
     report_page(),
-    Text('마이 페이지')
+    Text('마이 페이지'),
+    Test()
   ];
 
   // This widget is the root of your application.
@@ -42,7 +44,9 @@ class _MyAppState extends State<MyApp> {
               BottomNavigationBarItem(
                   icon: Icon(Icons.calculate_outlined), label: '리포트'),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.calculate_outlined), label: '마이페이지')
+                  icon: Icon(Icons.calculate_outlined), label: '마이페이지'),
+              BottomNavigationBarItem(
+                  icon: Icon(Icons.calculate_outlined), label: '테스트')
             ],
           ),
           body: _widgetOptions[_selectedIndex]),
