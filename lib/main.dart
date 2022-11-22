@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:capstone_design_flutter/page/home/home.dart';
 import 'package:capstone_design_flutter/page/report/report.dart';
 import 'package:capstone_design_flutter/page/test/test.dart';
+import 'package:capstone_design_flutter/page/mypage/mypage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +21,7 @@ class _MyAppState extends State<MyApp> {
   final List<Widget> _widgetOptions = <Widget>[
     Home(),
     report_page(),
-    Text('마이 페이지'),
+    Mypage(),
     Test()
   ];
 
