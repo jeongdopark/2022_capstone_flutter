@@ -4,7 +4,7 @@ import 'package:capstone_design_flutter/page/report/week_report.dart';
 import 'package:capstone_design_flutter/page/report/month_report.dart';
 
 class report_page extends StatefulWidget {
-  const report_page({Key? key}) : super(key: key);
+  const report_page({Key key}) : super(key: key);
 
   @override
   State<report_page> createState() => _report_pageState();

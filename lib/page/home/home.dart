@@ -15,8 +15,7 @@ class _HomeState extends State<Home> {
     // return MaterialApp() -> Material 디자인 테마를 사용
     return MaterialApp(
       title: "MyApp", // 앱 이름
-      debugShowCheckedModeBanner: false, // 타이틀 바 우측 띠 제거
-
+      debugShowCheckedModeBanner: false,
       // 앱의 기본적인 테마를 지정
       theme: ThemeData(
         primarySwatch: Colors.blue, // priamrySwatch 기본적인 앱의 색상을 지정
@@ -43,7 +42,7 @@ class _MyWidgetState extends State<MyWidget> {
         body: SingleChildScrollView(
             child: Column(
           children: [
-            SizedBox(height: 50),
+            SizedBox(height: 30),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -55,7 +54,7 @@ class _MyWidgetState extends State<MyWidget> {
                     iconSize: 40.0)
               ],
             ),
-            SizedBox(height: 50),
+            SizedBox(height: 20),
             Column(
               children: [
                 Row(
@@ -71,30 +70,30 @@ class _MyWidgetState extends State<MyWidget> {
                 ),
               ],
             ),
-            SizedBox(height: 50),
+            SizedBox(height: 30),
             Container(
                 // decoration:
                 //     BoxDecoration(borderRadius: BorderRadius.circular(10)),
                 width: 400,
-                height: 400,
+                height: 300,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(30),
                     color: const Color(0xffF0F0F0)),
                 padding: EdgeInsets.symmetric(vertical: 30, horizontal: 50),
                 child: Container(
                     padding:
-                        EdgeInsets.symmetric(vertical: 150, horizontal: 125),
+                        EdgeInsets.symmetric(vertical: 120, horizontal: 120),
                     child: Text('횟수'))),
-            SizedBox(height: 50),
+            SizedBox(height: 30),
             Column(children: [
               IconButton(
                   onPressed: () {},
                   icon: Icon(Icons.play_arrow_rounded),
                   color: const Color(0xff00c7ff),
-                  iconSize: 80.0),
+                  iconSize: 50.0),
               Text("식사 시작", style: TextStyle(color: const Color(0xff00c7ff)))
             ]),
-            SizedBox(height: 50)
+            SizedBox(height: 30)
           ],
         )),
       ),

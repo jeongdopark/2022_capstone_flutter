@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class week_report extends StatefulWidget {
-  const week_report({Key? key}) : super(key: key);
+  const week_report({Key key}) : super(key: key);
 
   @override
   State<week_report> createState() => _week_reportState();

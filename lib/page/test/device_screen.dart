@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
 class DeviceScreen extends StatefulWidget {
-  DeviceScreen({Key? key, required this.device}) : super(key: key);
+  DeviceScreen({Key key, this.device}) : super(key: key);
   // 장치 정보 전달 받기
   final BluetoothDevice device;
 
@@ -26,7 +26,7 @@ class _DeviceScreenState extends State<DeviceScreen> {
   BluetoothDeviceState deviceState = BluetoothDeviceState.disconnected;
 
   // 연결 상태 리스너 핸들 화면 종료시 리스너 해제를 위함
-  StreamSubscription<BluetoothDeviceState>? _stateListener;
+  StreamSubscription<BluetoothDeviceState> _stateListener;
 
   List<BluetoothService> bluetoothService = [];
 
@@ -94,7 +94,7 @@ class _DeviceScreenState extends State<DeviceScreen> {
 
   /* 연결 시작 */
   Future<bool> connect() async {
-    Future<bool>? returnValue;
+    Future<bool> returnValue;
     setState(() {
       /* 상태 표시를 Connecting으로 변경 */
       stateText = 'Connecting';
@@ -260,7 +260,7 @@ class _DeviceScreenState extends State<DeviceScreen> {
         properties += 'Notify ';
         if (notifyDatas.containsKey(c.uuid.toString())) {
           // notify 데이터가 존재한다면
-          if (notifyDatas[c.uuid.toString()]!.isNotEmpty) {
+          if (notifyDatas[c.uuid.toString()].isNotEmpty) {
             data = notifyDatas[c.uuid.toString()].toString();
           }
         }

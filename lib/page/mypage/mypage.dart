@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:capstone_design_flutter/page/test2/MainPage.dart';
 
 class Mypage extends StatelessWidget {
-  const Mypage({Key? key}) : super(key: key);
+  const Mypage({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(30),
+      padding: EdgeInsets.all(30),
+      color: Colors.white,
       child: Scaffold(
         backgroundColor: Colors.white,
         body: SingleChildScrollView(
             child: Column(
           children: [
             SizedBox(height: 50),
-            Text("마이페이지",
+            Text("마이 페이지",
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
             SizedBox(height: 70),
             GestureDetector(
@@ -47,7 +49,8 @@ class Mypage extends StatelessWidget {
             SizedBox(height: 30),
             GestureDetector(
               onTap: () {
-                print("hello");
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => MainPage()));
               },
               child: Row(
                 children: [
