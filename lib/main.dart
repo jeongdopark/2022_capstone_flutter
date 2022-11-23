@@ -4,6 +4,7 @@ import 'package:capstone_design_flutter/page/report/report.dart';
 import 'package:capstone_design_flutter/page/test/test.dart';
 import 'package:capstone_design_flutter/page/mypage/mypage.dart';
 import 'package:capstone_design_flutter/page/test2/MainPage.dart';
+import 'package:capstone_design_flutter/page/test2/ChatPage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,7 +12,6 @@ void main() {
 
 class MyApp extends StatefulWidget {
   const MyApp({key});
-
   @override
   State<MyApp> createState() => _MyAppState();
 }
@@ -23,6 +23,7 @@ class _MyAppState extends State<MyApp> {
     Home(),
     report_page(),
     Mypage(),
+    ChatPage()
   ];
 
   // This widget is the root of your application.
@@ -41,12 +42,13 @@ class _MyAppState extends State<MyApp> {
             selectedItemColor: Colors.lightBlue,
             onTap: _onItemTapped,
             items: [
+              BottomNavigationBarItem(icon: Icon(Icons.restaurant), label: '홈'),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.calculate_outlined), label: '홈'),
+                  icon: Icon(Icons.bar_chart_rounded), label: '리포트'),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.calculate_outlined), label: '리포트'),
+                  icon: Icon(Icons.perm_identity_rounded), label: '마이페이지'),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.calculate_outlined), label: '마이페이지'),
+                  icon: Icon(Icons.perm_identity_rounded), label: '블루투스 통신'),
             ],
           ),
           body: _widgetOptions[_selectedIndex]),

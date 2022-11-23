@@ -3,6 +3,8 @@ import 'dart:typed_data';
 
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 
+String a = '';
+
 class Communication {
   //Bluetooth
   FlutterBluetoothSerial fls;
@@ -51,6 +53,7 @@ class Communication {
 
     // Create message if there is new line character
     result = String.fromCharCodes(buffer);
+    a = result;
   }
 
   // To send Message

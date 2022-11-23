@@ -3,6 +3,11 @@ import 'dart:convert';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
+import 'package:capstone_design_flutter/page/home/home.dart';
+import 'package:capstone_design_flutter/page/mypage/mypage.dart';
+import 'package:capstone_design_flutter/page/report/report.dart';
+
+var test = '';
 
 class ChatPage extends StatefulWidget {
   final BluetoothDevice server;
@@ -26,7 +31,6 @@ class _ChatPage extends State<ChatPage> {
 
   List<_Message> messages = List<_Message>();
   String _messageBuffer = '';
-
   final TextEditingController textEditingController =
       new TextEditingController();
   final ScrollController listScrollController = new ScrollController();
@@ -35,11 +39,17 @@ class _ChatPage extends State<ChatPage> {
   bool get isConnected => connection != null && connection.isConnected;
 
   bool isDisconnecting = false;
+  int _selectedIndex = 3;
 
+  final List<Widget> _widgetOptions = <Widget>[
+    Home(),
+    report_page(),
+    Mypage(),
+    ChatPage()
+  ];
   @override
   void initState() {
     super.initState();
-
     BluetoothConnection.toAddress(widget.server.address).then((_connection) {
       print('Connected to the device');
       connection = _connection;
@@ -115,48 +125,64 @@ class _ChatPage extends State<ChatPage> {
               : isConnected
                   ? Text('Live chat with ' + widget.server.name)
                   : Text('Chat log with ' + widget.server.name))),
-      body: SafeArea(
-        child: Column(
-          children: <Widget>[
-            Flexible(
-              child: ListView(
-                  padding: const EdgeInsets.all(12.0),
-                  controller: listScrollController,
-                  children: list),
-            ),
-            Row(
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        unselectedItemColor: Colors.grey,
+        selectedItemColor: Colors.lightBlue,
+        onTap: _onItemTapped,
+        items: [
+          BottomNavigationBarItem(icon: Icon(Icons.restaurant), label: '홈'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.bar_chart_rounded), label: '리포트'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.perm_identity_rounded), label: '마이페이지'),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.perm_identity_rounded), label: '블루투스 통신'),
+        ],
+      ),
+      body: _selectedIndex == 3
+          ? (SafeArea(
+              child: Column(
               children: <Widget>[
                 Flexible(
-                  child: Container(
-                    margin: const EdgeInsets.only(left: 16.0),
-                    child: TextField(
-                      style: const TextStyle(fontSize: 15.0),
-                      controller: textEditingController,
-                      decoration: InputDecoration.collapsed(
-                        hintText: isConnecting
-                            ? 'Wait until connected...'
-                            : isConnected
-                                ? 'Type your message...'
-                                : 'Chat got disconnected',
-                        hintStyle: const TextStyle(color: Colors.grey),
+                  child: ListView(
+                      padding: const EdgeInsets.all(12.0),
+                      controller: listScrollController,
+                      children: list),
+                ),
+                Row(
+                  children: <Widget>[
+                    Flexible(
+                      child: Container(
+                        margin: const EdgeInsets.only(left: 16.0),
+                        child: TextField(
+                          style: const TextStyle(fontSize: 15.0),
+                          controller: textEditingController,
+                          decoration: InputDecoration.collapsed(
+                            hintText: isConnecting
+                                ? 'Wait until connected...'
+                                : isConnected
+                                    ? 'Type your message...'
+                                    : 'Chat got disconnected',
+                            hintStyle: const TextStyle(color: Colors.grey),
+                          ),
+                          enabled: isConnected,
+                        ),
                       ),
-                      enabled: isConnected,
                     ),
-                  ),
-                ),
-                Container(
-                  margin: const EdgeInsets.all(8.0),
-                  child: IconButton(
-                      icon: const Icon(Icons.send),
-                      onPressed: isConnected
-                          ? () => _sendMessage(textEditingController.text)
-                          : null),
-                ),
+                    Container(
+                      margin: const EdgeInsets.all(8.0),
+                      child: IconButton(
+                          icon: const Icon(Icons.send),
+                          onPressed: isConnected
+                              ? () => _sendMessage(textEditingController.text)
+                              : null),
+                    ),
+                  ],
+                )
               ],
-            )
-          ],
-        ),
-      ),
+            )))
+          : (_widgetOptions[_selectedIndex]),
     );
   }
 
@@ -200,6 +226,7 @@ class _ChatPage extends State<ChatPage> {
           ),
         );
         _messageBuffer = dataString.substring(index);
+        test = _messageBuffer;
       });
     } else {
       _messageBuffer = (backspacesCounter > 0
@@ -233,5 +260,11 @@ class _ChatPage extends State<ChatPage> {
         setState(() {});
       }
     }
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 }

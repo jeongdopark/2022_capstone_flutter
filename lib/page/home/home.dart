@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../test2/communication.dart';
+import 'package:capstone_design_flutter/page/test2/ChatPage.dart';
+
 // StatelessWidget은 변화지 않는 화면을 작업할 때 사용.
 // 변화는 화면을 작업 하고싶을 경우에는 StatefulWidget을 사용.
 class Home extends StatefulWidget {
@@ -64,13 +67,17 @@ class _MyWidgetState extends State<MyWidget> {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: const [
                     Text("홈", style: TextStyle(fontSize: 20)),
-                    Text("동기부여 멘트 및 한 줄 뉴스를 보여줍니다"),
                     Text("10:04"),
                   ],
                 ),
               ],
             ),
             SizedBox(height: 30),
+            Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Text(a, style: TextStyle(fontSize: 20)),
+                ]),
             Container(
                 // decoration:
                 //     BoxDecoration(borderRadius: BorderRadius.circular(10)),
@@ -87,7 +94,9 @@ class _MyWidgetState extends State<MyWidget> {
             SizedBox(height: 30),
             Column(children: [
               IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    print(test);
+                  },
                   icon: Icon(Icons.play_arrow_rounded),
                   color: const Color(0xff00c7ff),
                   iconSize: 50.0),

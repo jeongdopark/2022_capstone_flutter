@@ -67,7 +67,7 @@ class Mypage extends StatelessWidget {
               },
               child: Row(
                 children: [
-                  Icon(Icons.account_circle),
+                  Icon(Icons.settings),
                   SizedBox(width: 15),
                   Text("설정", style: TextStyle(fontSize: 20))
                 ],
