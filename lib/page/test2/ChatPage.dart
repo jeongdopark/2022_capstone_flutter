@@ -25,7 +25,7 @@ class _Message {
   _Message(this.whom, this.text);
 }
 
-class _ChatPage extends State<ChatPage> {
+class _ChatPage extends State<ChatPage> with ChangeNotifier {
   static final clientID = 0;
   BluetoothConnection connection;
 
@@ -234,6 +234,7 @@ class _ChatPage extends State<ChatPage> {
               0, _messageBuffer.length - backspacesCounter)
           : _messageBuffer + dataString);
     }
+    notifyListeners();
   }
 
   void _sendMessage(String text) async {

@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../test2/communication.dart';
 import 'package:capstone_design_flutter/page/test2/ChatPage.dart';
+import 'package:provider/provider.dart';
 
 // StatelessWidget은 변화지 않는 화면을 작업할 때 사용.
 // 변화는 화면을 작업 하고싶을 경우에는 StatefulWidget을 사용.
