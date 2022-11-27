@@ -9,7 +9,7 @@ import 'package:capstone_design_flutter/page/report/report.dart';
 
 var test = '';
 
-class ChatPage extends StatefulWidget {
+class ChatPage extends StatefulWidget with ChangeNotifier {
   final BluetoothDevice server;
   ChatPage({this.server});
 
@@ -27,10 +27,12 @@ class _Message {
 class _ChatPage extends State<ChatPage> with ChangeNotifier {
   static final clientID = 0;
   BluetoothConnection connection;
-
-  List<_Message> messages = List<_Message>();
   String _messageBuffer = '';
   String get message => _messageBuffer;
+  notifyListeners();
+
+  List<_Message> messages = List<_Message>();
+
   final TextEditingController textEditingController =
       new TextEditingController();
   final ScrollController listScrollController = new ScrollController();

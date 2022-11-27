@@ -9,9 +9,7 @@ import 'package:provider/provider.dart';
 
 void main() {
   runApp(MultiProvider(providers: [
-    Provider(
-      create: (context) => ChatPage(),
-    )
+    ChangeNotifierProvider(create: (_) => ChatPage()),
   ], child: MyApp()));
 }
 
