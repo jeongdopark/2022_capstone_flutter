@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../test2/communication.dart';
-import 'package:capstone_design_flutter/page/test2/ChatPage.dart';
+import 'package:capstone_design_flutter/src/page/test2/ChatPage.dart';
+import 'package:capstone_design_flutter/src/provider/provider_count.dart';
 import 'package:provider/provider.dart';
 
 // StatelessWidget은 변화지 않는 화면을 작업할 때 사용.
@@ -17,6 +18,8 @@ class _HomeState extends State<Home> {
   // MaterialApp = 앱으로서 기능을 할 수 있도록 도와주는 뼈대
   @override
   Widget build(BuildContext context) {
+    print('hello');
+    print(Provider.of<AppState>(context).getDisplayText);
     // return MaterialApp() -> Material 디자인 테마를 사용
     return MaterialApp(
       title: "MyApp", // 앱 이름
@@ -37,7 +40,7 @@ class MyWidget extends StatefulWidget {
   State<MyWidget> createState() => _MyWidgetState();
 }
 
-class _MyWidgetState extends State<MyWidget> with ChangeNotifier {
+class _MyWidgetState extends State<MyWidget> {
   // scaffold = 구성된 앱에서 디자인적인 부분을 도와주는 뼈대
 
   @override
@@ -48,7 +51,7 @@ class _MyWidgetState extends State<MyWidget> with ChangeNotifier {
         body: SingleChildScrollView(
             child: Column(
           children: [
-            SizedBox(height: 30),
+            SizedBox(height: 30.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -60,7 +63,6 @@ class _MyWidgetState extends State<MyWidget> with ChangeNotifier {
                     iconSize: 40.0)
               ],
             ),
-            SizedBox(height: 10),
             Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
@@ -77,24 +79,32 @@ class _MyWidgetState extends State<MyWidget> with ChangeNotifier {
                 padding: EdgeInsets.symmetric(vertical: 30, horizontal: 50),
                 child: Container(
                     padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                    child: Consumer<ChatPage>(
-                      builder: (context, _, child) => Text(
-                        Provider.of<ChatPage>(context).message.toString(),
-                        style: TextStyle(fontSize: 15),
-                      ),
-                    ))),
-            SizedBox(height: 30),
-            Column(children: [
-              IconButton(
-                  onPressed: () {
-                    print(test);
-                  },
-                  icon: Icon(Icons.play_arrow_rounded),
-                  color: const Color(0xff00c7ff),
-                  iconSize: 50.0),
-              Text("식사 시작", style: TextStyle(color: const Color(0xff00c7ff)))
-            ]),
-            SizedBox(height: 30)
+                    child: Text('${context.watch<AppState>().getDisplayText}',
+                        style: TextStyle(fontSize: 20.0)))),
+            SizedBox(height: 10),
+            Provider.of<AppState>(context).getConnectStatus == "False"
+                ? Column(children: [
+                    IconButton(
+                        onPressed: () {
+                          print(test);
+                        },
+                        icon: Icon(Icons.play_arrow_rounded),
+                        color: const Color(0xff00c7ff),
+                        iconSize: 50.0),
+                    Text("식사 시작",
+                        style: TextStyle(color: const Color(0xff00c7ff)))
+                  ])
+                : Column(children: [
+                    IconButton(
+                        onPressed: () {
+                          print(test);
+                        },
+                        icon: Icon(Icons.play_arrow_rounded),
+                        color: const Color(0xff00c7ff),
+                        iconSize: 50.0),
+                    Text("식사 종료",
+                        style: TextStyle(color: const Color(0xff00c7ff)))
+                  ]),
           ],
         )),
       ),

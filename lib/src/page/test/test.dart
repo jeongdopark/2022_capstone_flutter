@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
-import 'package:capstone_design_flutter/page/test/device_screen.dart';
+import 'package:capstone_design_flutter/src/page/test/device_screen.dart';
 
 class Test extends StatelessWidget {
   final title = 'Flutter BLE Scan Demo';

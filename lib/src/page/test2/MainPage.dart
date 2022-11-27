@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:capstone_design_flutter/page/test2/communication.dart';
+import 'package:capstone_design_flutter/src/page/test2/communication.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 
 import './SelectBondedDevicePage.dart';

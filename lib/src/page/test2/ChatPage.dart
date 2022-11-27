@@ -3,17 +3,17 @@ import 'dart:convert';
 import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
-import 'package:capstone_design_flutter/page/home/home.dart';
-import 'package:capstone_design_flutter/page/mypage/mypage.dart';
-import 'package:capstone_design_flutter/page/report/report.dart';
+import 'package:capstone_design_flutter/src/page/home/home.dart';
+import 'package:capstone_design_flutter/src/page/mypage/mypage.dart';
+import 'package:capstone_design_flutter/src/page/report/report.dart';
+import 'package:capstone_design_flutter/src/provider/provider_count.dart';
+import 'package:provider/provider.dart';
 
 var test = '';
-String _messageBuffer = '';
 
 class ChatPage extends StatefulWidget with ChangeNotifier {
   final BluetoothDevice server;
   ChatPage({this.server});
-  String get message => _messageBuffer;
   notifyListeners();
   @override
   _ChatPage createState() => new _ChatPage();
@@ -29,7 +29,7 @@ class _Message {
 class _ChatPage extends State<ChatPage> with ChangeNotifier {
   static final clientID = 0;
   BluetoothConnection connection;
-
+  String _messageBuffer = '';
   notifyListeners();
 
   List<_Message> messages = List<_Message>();
@@ -237,8 +237,8 @@ class _ChatPage extends State<ChatPage> with ChangeNotifier {
               0, _messageBuffer.length - backspacesCounter)
           : _messageBuffer + dataString);
     }
-
-    notifyListeners();
+    Provider.of<AppState>(context, listen: false)
+        .setDisplayText(_messageBuffer);
   }
 
   void _sendMessage(String text) async {

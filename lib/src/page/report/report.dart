@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:capstone_design_flutter/page/report/week_report.dart';
-import 'package:capstone_design_flutter/page/report/month_report.dart';
+import 'package:capstone_design_flutter/src/page/report/week_report.dart';
+import 'package:capstone_design_flutter/src/page/report/month_report.dart';
 
 class report_page extends StatefulWidget {
   const report_page({Key key}) : super(key: key);

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:capstone_design_flutter/page/test2/MainPage.dart';
+import 'package:capstone_design_flutter/src/page/test2/MainPage.dart';
 
 class Mypage extends StatelessWidget {
   const Mypage({Key key}) : super(key: key);
