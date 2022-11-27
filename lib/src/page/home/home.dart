@@ -82,11 +82,13 @@ class _MyWidgetState extends State<MyWidget> {
                     child: Text('${context.watch<AppState>().getDisplayText}',
                         style: TextStyle(fontSize: 20.0)))),
             SizedBox(height: 10),
-            Provider.of<AppState>(context).getConnectStatus == "False"
+            Provider.of<AppState>(context, listen: false).getConnectStatus ==
+                    "False"
                 ? Column(children: [
                     IconButton(
                         onPressed: () {
-                          print(test);
+                          Provider.of<AppState>(context, listen: false)
+                              .setConnectStatus("True");
                         },
                         icon: Icon(Icons.play_arrow_rounded),
                         color: const Color(0xff00c7ff),
@@ -97,14 +99,20 @@ class _MyWidgetState extends State<MyWidget> {
                 : Column(children: [
                     IconButton(
                         onPressed: () {
-                          print(test);
+                          Provider.of<AppState>(context, listen: false)
+                              .setConnectStatus("False");
+                          Provider.of<AppState>(context, listen: false)
+                              .setDisplayText("");
                         },
-                        icon: Icon(Icons.play_arrow_rounded),
+                        icon: Icon(Icons.pause_rounded),
                         color: const Color(0xff00c7ff),
                         iconSize: 50.0),
                     Text("식사 종료",
                         style: TextStyle(color: const Color(0xff00c7ff)))
                   ]),
+            SizedBox(
+              height: 10,
+            )
           ],
         )),
       ),

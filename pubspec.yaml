@@ -41,6 +41,7 @@ dependencies:
   font_awesome_flutter: ^9.2.0
   provider: ^6.0.4
   syncfusion_flutter_charts: ^20.3.58
+  table_calendar: ^3.0.8
 dev_dependencies:
   flutter_test:
     sdk: flutter

@@ -14,7 +14,7 @@ class _report_pageState extends State<report_page> {
   int currentPos = 0;
   final listPaths = [
     week_report(),
-    month_report(),
+    TableBasicsExample(),
   ];
 
   @override
@@ -26,28 +26,12 @@ class _report_pageState extends State<report_page> {
             scrollDirection: Axis.vertical,
             child: Column(
               children: [
-                SizedBox(height: 50),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Text(
-                      "저작 리포트",
-                      style: TextStyle(fontSize: 30),
-                    ),
-                    IconButton(
-                        onPressed: () {},
-                        icon: Icon(Icons.add_alert_rounded),
-                        color: const Color(0xff00c7ff),
-                        iconSize: 40.0)
-                  ],
-                ),
-                SizedBox(height: 10),
-                SizedBox(height: 10),
+                SizedBox(height: 20),
                 Container(
                     // decoration:
                     //     BoxDecoration(borderRadius: BorderRadius.circular(10)),
                     width: 350,
-                    height: 400,
+                    height: 500,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
                         color: const Color(0xffF0F0F0)),
@@ -57,7 +41,7 @@ class _report_pageState extends State<report_page> {
                         CarouselSlider.builder(
                             itemCount: listPaths.length,
                             options: CarouselOptions(
-                                height: 330,
+                                height: 450,
                                 viewportFraction: 1,
                                 onPageChanged: (index, reason) {
                                   setState(() {

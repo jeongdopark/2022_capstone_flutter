@@ -56,7 +56,7 @@ class _MyHomePageState extends State<_MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(20),
+          preferredSize: Size.fromHeight(15),
           child: AppBar(
             title: const Text(
               'Weekly Report',
