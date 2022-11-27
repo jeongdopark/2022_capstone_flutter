@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 
 // StatelessWidget은 변화지 않는 화면을 작업할 때 사용.
 // 변화는 화면을 작업 하고싶을 경우에는 StatefulWidget을 사용.
+
 class Home extends StatefulWidget {
   @override
   State<Home> createState() => _HomeState();
@@ -36,8 +37,9 @@ class MyWidget extends StatefulWidget {
   State<MyWidget> createState() => _MyWidgetState();
 }
 
-class _MyWidgetState extends State<MyWidget> {
+class _MyWidgetState extends State<MyWidget> with ChangeNotifier {
   // scaffold = 구성된 앱에서 디자인적인 부분을 도와주는 뼈대
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -58,22 +60,7 @@ class _MyWidgetState extends State<MyWidget> {
                     iconSize: 40.0)
               ],
             ),
-            SizedBox(height: 20),
-            Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: const [
-                    Text("홈", style: TextStyle(fontSize: 20)),
-                    Text("10:04"),
-                  ],
-                ),
-              ],
-            ),
-            SizedBox(height: 30),
+            SizedBox(height: 10),
             Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
@@ -89,9 +76,8 @@ class _MyWidgetState extends State<MyWidget> {
                     color: const Color(0xffF0F0F0)),
                 padding: EdgeInsets.symmetric(vertical: 30, horizontal: 50),
                 child: Container(
-                    padding:
-                        EdgeInsets.symmetric(vertical: 120, horizontal: 120),
-                    child: Text('횟수'))),
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                    child: Text(test))),
             SizedBox(height: 30),
             Column(children: [
               IconButton(

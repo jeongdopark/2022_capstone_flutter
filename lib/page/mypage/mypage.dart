@@ -14,10 +14,10 @@ class Mypage extends StatelessWidget {
         body: SingleChildScrollView(
             child: Column(
           children: [
-            SizedBox(height: 50),
+            SizedBox(height: 30),
             Text("마이 페이지",
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
-            SizedBox(height: 70),
+            SizedBox(height: 30),
             GestureDetector(
               onTap: () {
                 print("hello");
@@ -30,7 +30,7 @@ class Mypage extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 50),
+            SizedBox(height: 30),
             Container(
                 width: 500, child: Divider(color: Colors.grey, thickness: 1.0)),
             SizedBox(height: 30),
@@ -86,7 +86,7 @@ class Mypage extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 50),
+            SizedBox(height: 30),
             Container(
                 width: 500, child: Divider(color: Colors.grey, thickness: 1.0)),
             SizedBox(height: 30),
@@ -102,7 +102,6 @@ class Mypage extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 50),
           ],
         )),
       ),

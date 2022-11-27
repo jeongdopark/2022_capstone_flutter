@@ -11,8 +11,7 @@ var test = '';
 
 class ChatPage extends StatefulWidget {
   final BluetoothDevice server;
-
-  const ChatPage({this.server});
+  ChatPage({this.server});
 
   @override
   _ChatPage createState() => new _ChatPage();
@@ -31,6 +30,7 @@ class _ChatPage extends State<ChatPage> with ChangeNotifier {
 
   List<_Message> messages = List<_Message>();
   String _messageBuffer = '';
+  String get message => _messageBuffer;
   final TextEditingController textEditingController =
       new TextEditingController();
   final ScrollController listScrollController = new ScrollController();
@@ -234,6 +234,7 @@ class _ChatPage extends State<ChatPage> with ChangeNotifier {
               0, _messageBuffer.length - backspacesCounter)
           : _messageBuffer + dataString);
     }
+
     notifyListeners();
   }
 

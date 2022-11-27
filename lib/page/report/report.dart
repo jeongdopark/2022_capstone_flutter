@@ -41,38 +41,24 @@ class _report_pageState extends State<report_page> {
                         iconSize: 40.0)
                   ],
                 ),
-                SizedBox(height: 50),
-                Container(
-                    padding: EdgeInsets.all(15),
-                    // decoration:
-                    //     BoxDecoration(borderRadius: BorderRadius.circular(10)),
-                    width: 400,
-                    height: 50,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(30),
-                        color: const Color(0xffF0F0F0)),
-                    child: Text(
-                      'OOO님의 저작 습관을 요약해 보았습니다!',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 15),
-                    )),
-                SizedBox(height: 50),
+                SizedBox(height: 10),
+                SizedBox(height: 10),
                 Container(
                     // decoration:
                     //     BoxDecoration(borderRadius: BorderRadius.circular(10)),
-                    width: 500,
+                    width: 350,
                     height: 400,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
                         color: const Color(0xffF0F0F0)),
-                    padding: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                     child: Column(
                       children: [
                         CarouselSlider.builder(
                             itemCount: listPaths.length,
                             options: CarouselOptions(
                                 height: 330,
-                                viewportFraction: 2,
+                                viewportFraction: 1,
                                 onPageChanged: (index, reason) {
                                   setState(() {
                                     currentPos = index;

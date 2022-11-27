@@ -5,9 +5,14 @@ import 'package:capstone_design_flutter/page/test/test.dart';
 import 'package:capstone_design_flutter/page/mypage/mypage.dart';
 import 'package:capstone_design_flutter/page/test2/MainPage.dart';
 import 'package:capstone_design_flutter/page/test2/ChatPage.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MultiProvider(providers: [
+    Provider(
+      create: (context) => ChatPage(),
+    )
+  ], child: MyApp()));
 }
 
 class MyApp extends StatefulWidget {
