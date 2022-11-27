@@ -77,7 +77,12 @@ class _MyWidgetState extends State<MyWidget> with ChangeNotifier {
                 padding: EdgeInsets.symmetric(vertical: 30, horizontal: 50),
                 child: Container(
                     padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                    child: Text(context.watch<ChatPage>().message.toString()))),
+                    child: Consumer<ChatPage>(
+                      builder: (context, _, child) => Text(
+                        Provider.of<ChatPage>(context).message.toString(),
+                        style: TextStyle(fontSize: 15),
+                      ),
+                    ))),
             SizedBox(height: 30),
             Column(children: [
               IconButton(
