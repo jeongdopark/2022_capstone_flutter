@@ -26,7 +26,7 @@ class _report_pageState extends State<report_page> {
             scrollDirection: Axis.vertical,
             child: Column(
               children: [
-                SizedBox(height: 20),
+                SizedBox(height: 40),
                 Container(
                     // decoration:
                     //     BoxDecoration(borderRadius: BorderRadius.circular(10)),

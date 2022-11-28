@@ -89,6 +89,8 @@ class _MyWidgetState extends State<MyWidget> {
                         onPressed: () {
                           Provider.of<AppState>(context, listen: false)
                               .setConnectStatus("True");
+                          Provider.of<AppState>(context, listen: false)
+                              .setDisplayText("식사 시작");
                         },
                         icon: Icon(Icons.play_arrow_rounded),
                         color: const Color(0xff00c7ff),
