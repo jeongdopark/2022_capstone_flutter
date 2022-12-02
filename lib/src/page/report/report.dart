@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:capstone_design_flutter/src/page/report/week_report.dart';
 import 'package:capstone_design_flutter/src/page/report/month_report.dart';
+import 'package:capstone_design_flutter/src/page/report/month_line_chart.dart';
 
 class report_page extends StatefulWidget {
   const report_page({Key key}) : super(key: key);
@@ -12,10 +13,7 @@ class report_page extends StatefulWidget {
 
 class _report_pageState extends State<report_page> {
   int currentPos = 0;
-  final listPaths = [
-    week_report(),
-    TableBasicsExample(),
-  ];
+  final listPaths = [week_report(), TableBasicsExample(), Month_line()];
 
   @override
   Widget build(BuildContext context) {

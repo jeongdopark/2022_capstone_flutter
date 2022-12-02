@@ -41,7 +41,7 @@ class _MyHomePageState extends State<_MyHomePage> {
   @override
   void initState() {
     data = [
-      _ChartData('Mon', 12),
+      _ChartData('Mon', 20),
       _ChartData('Tue', 15),
       _ChartData('Wed', 12),
       _ChartData('Thur', 15),

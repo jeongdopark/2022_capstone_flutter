@@ -7,6 +7,14 @@ class AppState with ChangeNotifier {
   String _connectStatus = "False";
   String get getConnectStatus => _connectStatus;
 
+  int _displayNumber = 0;
+  int get getDisplayNumber => _displayNumber;
+
+  void setDisplayNumber(int number) {
+    _displayNumber = number;
+    notifyListeners();
+  }
+
   void setConnectStatus(String text) {
     _connectStatus = text;
     notifyListeners();

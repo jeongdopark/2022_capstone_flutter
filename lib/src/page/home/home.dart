@@ -79,7 +79,10 @@ class _MyWidgetState extends State<MyWidget> {
                 padding: EdgeInsets.symmetric(vertical: 30, horizontal: 50),
                 child: Container(
                     padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                    child: Text('${context.watch<AppState>().getDisplayText}',
+                    child: Text(
+                        context.watch<AppState>().getDisplayNumber == 0
+                            ? ""
+                            : '${context.watch<AppState>().getDisplayNumber}',
                         style: TextStyle(fontSize: 20.0)))),
             SizedBox(height: 10),
             Provider.of<AppState>(context, listen: false).getConnectStatus ==

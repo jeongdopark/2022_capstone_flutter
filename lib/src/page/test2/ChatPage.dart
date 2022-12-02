@@ -237,8 +237,12 @@ class _ChatPage extends State<ChatPage> with ChangeNotifier {
               0, _messageBuffer.length - backspacesCounter)
           : _messageBuffer + dataString);
     }
-    Provider.of<AppState>(context, listen: false)
-        .setDisplayText(_messageBuffer);
+    print('data type');
+    _messageBuffer = _messageBuffer.trim();
+    print(_messageBuffer);
+
+    int test1 = int.parse(_messageBuffer.substring(12, 16));
+    Provider.of<AppState>(context, listen: false).setDisplayNumber(test1);
   }
 
   void _sendMessage(String text) async {
