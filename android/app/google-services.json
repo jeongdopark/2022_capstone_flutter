@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "32586591446",
+    "project_id": "flutter-capstone-efb0c",
+    "storage_bucket": "flutter-capstone-efb0c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:32586591446:android:98fd9692db41867e78ed77",
+        "android_client_info": {
+          "package_name": "com.example.capstone_design_flutter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "32586591446-rh3plvcdk3drtrdq3af1uvtd3tph63iu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIo6eB2VSuyXqbqoIOnGpHNeOVDsi12Og"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "32586591446-rh3plvcdk3drtrdq3af1uvtd3tph63iu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,96 +1,72 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
-void main() {
-  runApp(
-    MaterialApp(
-      home: HomePage(),
-      title: "Ripple-Animation",
-    ),
-  );
-  SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-        statusBarIconBrightness: Brightness.light),
-  );
-}
+import 'package:neon_circular_timer/neon_circular_timer.dart';
 
-class HomePage extends StatefulWidget {
-  @override
-  _HomePageState createState() => _HomePageState();
-}
+void main() => runApp(MyApp());
 
-class _HomePageState extends State<HomePage>
-    with SingleTickerProviderStateMixin {
-  AnimationController _animationController;
-  Animation<double> _animation;
-
-  @override
-  void initState() {
-    super.initState();
-    _animationController = AnimationController(
-      vsync: this,
-      duration: Duration(seconds: 1),
-    );
-
-    _animation = Tween<double>(begin: 0, end: 1).animate(_animationController)
-      ..addListener(() {
-        setState(() {});
-      })
-      ..addStatusListener((status) {
-        if (status == AnimationStatus.dismissed) {
-          _animationController.forward();
-        } else if (status == AnimationStatus.completed) {
-          _animationController.repeat();
-        }
-      });
-
-    _animationController.forward();
-  }
-
-  @override
-  void dispose() {
-    _animationController.dispose();
-    super.dispose();
-  }
-
+class MyApp extends StatelessWidget {
+  final CountDownController controller = new CountDownController();
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: CustomPaint(
-          painter: MyCustomPainter(_animation.value),
-          child: Container(),
-        ),
-      ),
-    );
-  }
-}
-
-class MyCustomPainter extends CustomPainter {
-  final double animationValue;
-
-  MyCustomPainter(this.animationValue);
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    for (int value = 3; value >= 0; value--) {
-      circle(canvas, Rect.fromLTRB(0, 0, size.width, size.height),
-          value + animationValue);
-    }
-  }
-
-  void circle(Canvas canvas, Rect rect, double value) {
-    Paint paint = Paint()
-      ..color = Color(0xff19DC7C).withOpacity((1 - (value / 4)).clamp(.0, 1));
-
-    canvas.drawCircle(rect.center,
-        sqrt((rect.width * .5 * rect.width * .5) * value / 4), paint);
-  }
-
-  @override
-  bool shouldRepaint(MyCustomPainter oldDelegate) {
-    return true;
+    return MaterialApp(
+        title: 'Material App',
+        home: Scaffold(
+            backgroundColor: Colors.grey.shade200,
+            appBar: AppBar(
+              title: Text('neon circular timer'),
+            ),
+            body: Padding(
+              padding: const EdgeInsets.only(top: 50),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  NeonCircularTimer(
+                      onComplete: () {
+                        controller.restart();
+                      },
+                      width: 200,
+                      controller: controller,
+                      duration: 20,
+                      strokeWidth: 10,
+                      isTimerTextShown: true,
+                      neumorphicEffect: true,
+                      outerStrokeColor: Colors.grey.shade100,
+                      innerFillGradient: LinearGradient(colors: [
+                        Colors.greenAccent.shade200,
+                        Colors.blueAccent.shade400
+                      ]),
+                      neonGradient: LinearGradient(colors: [
+                        Colors.greenAccent.shade200,
+                        Colors.blueAccent.shade400
+                      ]),
+                      strokeCap: StrokeCap.round,
+                      innerFillColor: Colors.black12,
+                      backgroudColor: Colors.grey.shade100,
+                      neonColor: Colors.blue.shade900),
+                  Padding(
+                    padding: const EdgeInsets.all(40),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          IconButton(
+                              icon: Icon(Icons.play_arrow),
+                              onPressed: () {
+                                controller.resume();
+                              }),
+                          IconButton(
+                              icon: Icon(Icons.pause),
+                              onPressed: () {
+                                controller.pause();
+                              }),
+                          IconButton(
+                              icon: Icon(Icons.repeat),
+                              onPressed: () {
+                                controller.restart();
+                              }),
+                        ]),
+                  )
+                ],
+              ),
+            )));
   }
 }

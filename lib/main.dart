@@ -177,12 +177,12 @@ List<String> listOfStrings = [
   'Home',
   'Report',
   'Setting',
-  'Account',
+  'BlT',
 ];
 
 List<IconData> listOfIcons = [
   Icons.restaurant,
   Icons.bar_chart_rounded,
   Icons.settings_rounded,
-  Icons.perm_identity_rounded,
+  Icons.bluetooth_rounded,
 ];

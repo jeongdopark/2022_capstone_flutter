@@ -42,6 +42,9 @@ dependencies:
   provider: ^6.0.4
   syncfusion_flutter_charts: ^20.3.58
   table_calendar: ^3.0.8
+  cloud_firestore: ^4.1.0
+  neon_circular_timer: ^0.0.7
+  loading_animation_widget: ^1.2.0+3
 dev_dependencies:
   flutter_test:
     sdk: flutter

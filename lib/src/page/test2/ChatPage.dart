@@ -8,6 +8,7 @@ import 'package:capstone_design_flutter/src/page/mypage/mypage.dart';
 import 'package:capstone_design_flutter/src/page/report/report.dart';
 import 'package:capstone_design_flutter/src/provider/provider_count.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/services.dart';
 
 var test = '';
 
@@ -97,6 +98,7 @@ class _ChatPage extends State<ChatPage> with ChangeNotifier {
 
   @override
   Widget build(BuildContext context) {
+    double displayWidth = MediaQuery.of(context).size.width;
     final List<Row> list = messages.map((_message) {
       return Row(
         children: <Widget>[
@@ -128,20 +130,107 @@ class _ChatPage extends State<ChatPage> with ChangeNotifier {
               : isConnected
                   ? Text('Live chat with ' + widget.server.name)
                   : Text('Chat log with ' + widget.server.name))),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        unselectedItemColor: Colors.grey,
-        selectedItemColor: Colors.lightBlue,
-        onTap: _onItemTapped,
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.restaurant), label: '홈'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.bar_chart_rounded), label: '리포트'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.perm_identity_rounded), label: '마이페이지'),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.perm_identity_rounded), label: '블루투스 통신'),
-        ],
+      bottomNavigationBar: Container(
+        // margin: EdgeInsets.all(displayWidth * .05),
+        height: displayWidth * .155,
+        decoration: BoxDecoration(
+          color: Colors.white,
+        ),
+        child: ListView.builder(
+          itemCount: 4,
+          scrollDirection: Axis.horizontal,
+          padding: EdgeInsets.symmetric(horizontal: displayWidth * .02),
+          itemBuilder: (context, index) => InkWell(
+            onTap: () {
+              setState(() {
+                _selectedIndex = index;
+                HapticFeedback.lightImpact();
+              });
+            },
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            child: Stack(
+              children: [
+                AnimatedContainer(
+                  duration: Duration(seconds: 1),
+                  curve: Curves.fastLinearToSlowEaseIn,
+                  width: index == _selectedIndex
+                      ? displayWidth * .32
+                      : displayWidth * .18,
+                  alignment: Alignment.center,
+                  child: AnimatedContainer(
+                    duration: Duration(seconds: 1),
+                    curve: Curves.fastLinearToSlowEaseIn,
+                    height: index == _selectedIndex ? displayWidth * .12 : 0,
+                    width: index == _selectedIndex ? displayWidth * .32 : 0,
+                    decoration: BoxDecoration(
+                      color: index == _selectedIndex
+                          ? Colors.blueAccent.withOpacity(.2)
+                          : Colors.transparent,
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                  ),
+                ),
+                AnimatedContainer(
+                  duration: Duration(seconds: 1),
+                  curve: Curves.fastLinearToSlowEaseIn,
+                  width: index == _selectedIndex
+                      ? displayWidth * .31
+                      : displayWidth * .18,
+                  alignment: Alignment.center,
+                  child: Stack(
+                    children: [
+                      Row(
+                        children: [
+                          AnimatedContainer(
+                            duration: Duration(seconds: 1),
+                            curve: Curves.fastLinearToSlowEaseIn,
+                            width: index == _selectedIndex
+                                ? displayWidth * .13
+                                : 0,
+                          ),
+                          AnimatedOpacity(
+                            opacity: index == _selectedIndex ? 1 : 0,
+                            duration: Duration(seconds: 1),
+                            curve: Curves.fastLinearToSlowEaseIn,
+                            child: Text(
+                              index == _selectedIndex
+                                  ? '${listOfStrings[index]}'
+                                  : '',
+                              style: TextStyle(
+                                color: Colors.blueAccent,
+                                fontWeight: FontWeight.w600,
+                                fontSize: 15,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          AnimatedContainer(
+                            duration: Duration(seconds: 1),
+                            curve: Curves.fastLinearToSlowEaseIn,
+                            width: index == _selectedIndex
+                                ? displayWidth * .03
+                                : 20,
+                          ),
+                          Icon(
+                            listOfIcons[index],
+                            size: displayWidth * .076,
+                            color: index == _selectedIndex
+                                ? Colors.blueAccent
+                                : Colors.black26,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ),
       body: _selectedIndex == 3
           ? (SafeArea(
@@ -277,3 +366,17 @@ class _ChatPage extends State<ChatPage> with ChangeNotifier {
     });
   }
 }
+
+List<IconData> listOfIcons = [
+  Icons.restaurant,
+  Icons.bar_chart_rounded,
+  Icons.settings_rounded,
+  Icons.bluetooth_rounded,
+];
+
+List<String> listOfStrings = [
+  'Home',
+  'Report',
+  'Setting',
+  'BlT',
+];
