@@ -96,10 +96,14 @@ class _MyWidgetState extends State<MyWidget> {
                               .setDisplayText("식사 시작");
                         },
                         icon: Icon(Icons.play_arrow_rounded),
-                        color: const Color(0xff00c7ff),
+                        color: Colors.blueAccent,
                         iconSize: 50.0),
-                    Text("식사 시작",
-                        style: TextStyle(color: const Color(0xff00c7ff)))
+                    Text("Start Button",
+                        style: TextStyle(
+                          color: Colors.blueAccent,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 15,
+                        ))
                   ])
                 : Column(children: [
                     IconButton(
@@ -110,10 +114,14 @@ class _MyWidgetState extends State<MyWidget> {
                               .setDisplayText("");
                         },
                         icon: Icon(Icons.pause_rounded),
-                        color: const Color(0xff00c7ff),
+                        color: Colors.blueAccent,
                         iconSize: 50.0),
-                    Text("식사 종료",
-                        style: TextStyle(color: const Color(0xff00c7ff)))
+                    Text("End Button",
+                        style: TextStyle(
+                          color: Colors.blueAccent,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 15,
+                        ))
                   ]),
             SizedBox(
               height: 10,
