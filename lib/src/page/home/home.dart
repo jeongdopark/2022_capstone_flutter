@@ -83,8 +83,15 @@ class _MyWidgetState extends State<MyWidget> {
                       ? Column(
                           children: [
                             Text(
-                              "기기 착용 후 시작 버튼을 눌러주세요",
-                              style: TextStyle(fontSize: 20.0),
+                              "기기 착용 후",
+                              style: TextStyle(
+                                  fontSize: 18.0, fontWeight: FontWeight.w700),
+                              textAlign: TextAlign.center,
+                            ),
+                            Text(
+                              "시작 버튼을 터치하세요",
+                              style: TextStyle(
+                                  fontSize: 18.0, fontWeight: FontWeight.w700),
                               textAlign: TextAlign.center,
                             ),
                           ],

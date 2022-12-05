@@ -14,7 +14,7 @@ class _BouncingButtonState extends State<BouncingButton>
     _controller = AnimationController(
       vsync: this,
       duration: Duration(
-        milliseconds: 100,
+        milliseconds: 500,
       ),
       lowerBound: 0.0,
       upperBound: 0.1,
@@ -34,9 +34,21 @@ class _BouncingButtonState extends State<BouncingButton>
   Widget build(BuildContext context) {
     _scale = 1 - _controller.value;
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Flutter Bouncing Button Animation Demo"),
+        centerTitle: true,
+        automaticallyImplyLeading: false,
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          Text(
+            'Press the Below Button',
+            style: TextStyle(color: Colors.grey[400], fontSize: 20.0),
+          ),
+          SizedBox(
+            height: 20.0,
+          ),
           Center(
             child: GestureDetector(
               onTapDown: _tapDown,
@@ -54,8 +66,8 @@ class _BouncingButtonState extends State<BouncingButton>
 
   Widget _animatedButton() {
     return Container(
-      height: 30,
-      width: 100,
+      height: 70,
+      width: 200,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(100.0),
           boxShadow: [
@@ -73,6 +85,13 @@ class _BouncingButtonState extends State<BouncingButton>
               Color(0xffff99cc),
             ],
           )),
+      child: Center(
+        child: Text(
+          'Press',
+          style: TextStyle(
+              fontSize: 20.0, fontWeight: FontWeight.bold, color: Colors.black),
+        ),
+      ),
     );
   }
 

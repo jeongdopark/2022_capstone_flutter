@@ -6,6 +6,7 @@ import 'package:capstone_design_flutter/src/page/mypage/mypage.dart';
 import 'package:capstone_design_flutter/src/page/test2/MainPage.dart';
 import 'package:capstone_design_flutter/src/page/test2/ChatPage.dart';
 import 'package:capstone_design_flutter/src/provider/provider_count.dart';
+import 'package:capstone_design_flutter/src/page/test_page.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
 
@@ -41,7 +42,7 @@ class _MyAppState extends State<MyApp> {
     Home(),
     report_page(),
     Mypage(),
-    ChatPage()
+    ChatPage(),
   ];
 
   // This widget is the root of your application.
