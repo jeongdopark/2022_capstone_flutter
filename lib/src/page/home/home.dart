@@ -39,6 +39,17 @@ class MyWidget extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<MyWidget> {
+  bool isLoading = true;
+
+  Future loadData() async {
+    setState(() {
+      isLoading = true;
+    });
+    await Future.delayed(Duration(seconds: 2));
+    setState(() {
+      isLoading = false;
+    });
+  }
   // scaffold = 구성된 앱에서 디자인적인 부분을 도와주는 뼈대
 
   @override
@@ -96,21 +107,44 @@ class _MyWidgetState extends State<MyWidget> {
                             ),
                           ],
                         )
-                      : Column(
-                          children: [
-                            Text(
-                                context.watch<AppState>().getDisplayNumber == 0
-                                    ? ""
-                                    : '${context.watch<AppState>().getDisplayNumber}',
-                                style: TextStyle(fontSize: 20.0)),
-                            SizedBox(height: 180),
-                            LoadingAnimationWidget.twistingDots(
-                              leftDotColor: const Color(0xFF0277BD),
-                              rightDotColor: const Color(0xFF448AFF),
-                              size: 40,
-                            ),
-                          ],
-                        )),
+                      : isLoading == true
+                          ? Column(
+                              children: [
+                                ListTile(
+                                  leading:
+                                      LoadingAnimationWidget.fourRotatingDots(
+                                    color: Color(0xFF0277BD),
+                                    size: 50,
+                                  ),
+                                ),
+                                Text(
+                                    context
+                                                .watch<AppState>()
+                                                .getDisplayNumber ==
+                                            0
+                                        ? ""
+                                        : '${context.watch<AppState>().getDisplayNumber}',
+                                    style: TextStyle(fontSize: 20.0)),
+                              ],
+                            )
+                          : Column(
+                              children: [
+                                Text(
+                                    context
+                                                .watch<AppState>()
+                                                .getDisplayNumber ==
+                                            0
+                                        ? ""
+                                        : '${context.watch<AppState>().getDisplayNumber}',
+                                    style: TextStyle(fontSize: 20.0)),
+                                SizedBox(height: 130),
+                                LoadingAnimationWidget.twistingDots(
+                                  leftDotColor: const Color(0xFF0277BD),
+                                  rightDotColor: const Color(0xFF448AFF),
+                                  size: 40,
+                                ),
+                              ],
+                            )),
             ),
             SizedBox(height: 10),
             Provider.of<AppState>(context, listen: false).getConnectStatus ==
@@ -118,6 +152,7 @@ class _MyWidgetState extends State<MyWidget> {
                 ? Column(children: [
                     IconButton(
                         onPressed: () {
+                          loadData();
                           Provider.of<AppState>(context, listen: false)
                               .setConnectStatus("True");
                           Provider.of<AppState>(context, listen: false)
