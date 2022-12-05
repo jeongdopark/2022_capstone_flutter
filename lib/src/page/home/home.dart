@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../test2/communication.dart';
 import 'package:capstone_design_flutter/src/provider/provider_count.dart';
+import 'package:capstone_design_flutter/src/page/test_page.dart';
 import 'package:provider/provider.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
@@ -45,7 +46,7 @@ class _MyWidgetState extends State<MyWidget> {
     setState(() {
       isLoading = true;
     });
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 4));
     setState(() {
       isLoading = false;
     });
@@ -109,22 +110,12 @@ class _MyWidgetState extends State<MyWidget> {
                         )
                       : isLoading == true
                           ? Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                ListTile(
-                                  leading:
-                                      LoadingAnimationWidget.fourRotatingDots(
-                                    color: Color(0xFF0277BD),
-                                    size: 50,
-                                  ),
+                                LoadingAnimationWidget.hexagonDots(
+                                  color: Color(0xFF0277BD),
+                                  size: 55,
                                 ),
-                                Text(
-                                    context
-                                                .watch<AppState>()
-                                                .getDisplayNumber ==
-                                            0
-                                        ? ""
-                                        : '${context.watch<AppState>().getDisplayNumber}',
-                                    style: TextStyle(fontSize: 20.0)),
                               ],
                             )
                           : Column(
@@ -136,8 +127,10 @@ class _MyWidgetState extends State<MyWidget> {
                                             0
                                         ? ""
                                         : '${context.watch<AppState>().getDisplayNumber}',
-                                    style: TextStyle(fontSize: 20.0)),
-                                SizedBox(height: 130),
+                                    style: TextStyle(
+                                        fontSize: 45.0,
+                                        fontWeight: FontWeight.bold)),
+                                TimerPage(),
                                 LoadingAnimationWidget.twistingDots(
                                   leftDotColor: const Color(0xFF0277BD),
                                   rightDotColor: const Color(0xFF448AFF),
@@ -155,8 +148,6 @@ class _MyWidgetState extends State<MyWidget> {
                           loadData();
                           Provider.of<AppState>(context, listen: false)
                               .setConnectStatus("True");
-                          Provider.of<AppState>(context, listen: false)
-                              .setDisplayText("식사 시작");
                         },
                         icon: Icon(Icons.play_arrow_rounded),
                         color: Colors.blueAccent,
