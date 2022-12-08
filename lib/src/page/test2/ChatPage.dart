@@ -344,8 +344,13 @@ class _ChatPage extends State<ChatPage> with ChangeNotifier {
     _messageBuffer = _messageBuffer.trim();
     print(_messageBuffer);
 
-    int test1 = int.parse(_messageBuffer.substring(12, 16));
-    Provider.of<AppState>(context, listen: false).setDisplayNumber(test1);
+    // int test1 = int.parse(_messageBuffer.substring(12, 16));
+    // Provider.of<AppState>(context, listen: false).setDisplayNumber(test1);
+    print("-----------------------");
+    print(Provider.of<AppState>(context, listen: false).getCountNumber);
+    print("-----------------------");
+    Provider.of<AppState>(context, listen: false).setCountNumber(
+        Provider.of<AppState>(context, listen: false).getCountNumber + 1);
   }
 
   void _sendMessage(String text) async {
