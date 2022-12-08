@@ -16,6 +16,7 @@ class Communication {
   Future<void> connectBl(address) async {
     await BluetoothConnection.toAddress(address).then((_connection) {
       print('Connected to the device');
+      // print("블루투스 연결 완료");
       connection = _connection;
 
       // Creates a listener to receive data
@@ -73,6 +74,7 @@ class Communication {
     if (connection.isConnected) {
       connection.dispose();
       connection = null;
+      // print("블루투스 연결 해제");
     }
   }
 }

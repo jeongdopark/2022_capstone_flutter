@@ -55,12 +55,16 @@ class _ChatPage extends State<ChatPage> with ChangeNotifier {
   void initState() {
     super.initState();
     BluetoothConnection.toAddress(widget.server.address).then((_connection) {
+      Provider.of<AppState>(context, listen: false)
+          .setBlueConnectStatus("True");
       print('Connected to the device');
       connection = _connection;
-      setState(() {
-        isConnecting = false;
-        isDisconnecting = false;
-      });
+      if (mounted) {
+        setState(() {
+          isConnecting = false;
+          isDisconnecting = false;
+        });
+      }
 
       connection.input.listen(_onDataReceived).onDone(() {
         // Example: Detect which side closed the connection
@@ -71,10 +75,19 @@ class _ChatPage extends State<ChatPage> with ChangeNotifier {
         // If we didn't except this (no flag set), it means closing by remote.
         if (isDisconnecting) {
           print('Disconnecting locally!');
+          print("연결해제 !!!!");
+          // print(Provider.of<AppState>(context, listen: false)
+          //     .getBlueConnectStatus);
+          // Provider.of<AppState>(context, listen: false)
+          //     .setBlueConnectStatus("False");
+          // print(Provider.of<AppState>(context, listen: false)
+          //     .getBlueConnectStatus);
+          // print("여기까지 떠야한다고 !!");
         } else {
           print('Disconnected remotely!');
+          print("여긴 뭐지 ?!!");
         }
-        if (this.mounted) {
+        if (mounted) {
           setState(() {});
         }
       });
@@ -86,14 +99,13 @@ class _ChatPage extends State<ChatPage> with ChangeNotifier {
 
   @override
   void dispose() {
+    super.dispose();
     // Avoid memory leak (`setState` after dispose) and disconnect
     if (isConnected) {
       isDisconnecting = true;
       connection.dispose();
       connection = null;
     }
-
-    super.dispose();
   }
 
   @override
@@ -142,10 +154,12 @@ class _ChatPage extends State<ChatPage> with ChangeNotifier {
           padding: EdgeInsets.symmetric(horizontal: displayWidth * .02),
           itemBuilder: (context, index) => InkWell(
             onTap: () {
-              setState(() {
-                _selectedIndex = index;
-                HapticFeedback.lightImpact();
-              });
+              if (mounted) {
+                setState(() {
+                  _selectedIndex = index;
+                  HapticFeedback.lightImpact();
+                });
+              }
             },
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
