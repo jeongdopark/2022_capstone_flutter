@@ -126,6 +126,8 @@ class MinutesAndSecondsState extends State<MinutesAndSeconds> {
     if (elapsed.minutes != minutes || elapsed.seconds != seconds) {
       if (this.mounted) {
         setState(() {
+          Provider.of<AppState>(context, listen: false).setEatMinute(
+              '${(minutes % 60).toString().padLeft(2, '0')}분${(seconds % 60).toString().padLeft(2, '0')}초');
           minutes = elapsed.minutes;
           seconds = elapsed.seconds;
         });
@@ -137,7 +139,8 @@ class MinutesAndSecondsState extends State<MinutesAndSeconds> {
   Widget build(BuildContext context) {
     String minutesStr = (minutes % 60).toString().padLeft(2, '0');
     String secondsStr = (seconds % 60).toString().padLeft(2, '0');
-    return new Text('$minutesStr:$secondsStr', style: dependencies.textStyle);
+    return new Text('$minutesStr:$secondsStr',
+        style: dependencies.textStyle); // 화면에 보일 시간 출력하는 양식
   }
 }
 
@@ -184,11 +187,12 @@ class _MyWidgetState extends State<MyWidget> {
       isLoading = false;
     });
   }
+
   Future loading_end() async {
     setState(() {
       isLoading = false;
     });
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 5));
     setState(() {
       isLoading = true;
     });
@@ -252,150 +256,168 @@ class _MyWidgetState extends State<MyWidget> {
                   child: Provider.of<AppState>(context, listen: false)
                               .getConnectStatus ==
                           "False"
-                      ?  isLoading == false ?
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      LoadingAnimationWidget.hexagonDots(
-                        color: Color(0xFF0277BD),
-                        size: 55,
-                      ),
-                    ],
-                  ) :
-                  Column(
-                          children: [
-                            Text(
-                              "기기 착용과",
-                              style: TextStyle(
-                                  fontSize: 18.0, fontWeight: FontWeight.w700),
-                              textAlign: TextAlign.center,
-                            ),
-                            Text(
-                              "체크 박스 선택 후",
-                              style: TextStyle(
-                                  fontSize: 18.0, fontWeight: FontWeight.w700),
-                              textAlign: TextAlign.center,
-                            ),
-                            Text(
-                              "시작 버튼을 터치하세요",
-                              style: TextStyle(
-                                  fontSize: 18.0, fontWeight: FontWeight.w700),
-                              textAlign: TextAlign.center,
-                            ),
-                            SizedBox(height : 35),
-                            Row(
+                      ? isLoading == false
+                          ? Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text('아침', style: TextStyle(
-                                    fontSize: 15.0, fontWeight: FontWeight.w700)),
-                                Transform.scale(
-                                  scale: 1.5,
-                                  child: Checkbox(
-                                    activeColor: Colors.white,
-                                    checkColor: Colors.blueAccent,
-                                    value: _checkBoxValue1,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        Provider.of<AppState>(context, listen: false)
-                                            .setEatTime("아침");
-
-                                        if(value == true){  // 체크 박스 하나만 체크되도록 if문 설정
-                                          Provider.of<AppState>(context, listen: false)
-                                              .setEatBoolean("True");
-                                          _checkBoxValue1 = value;
-                                          _checkBoxValue2 = !value;
-                                          _checkBoxValue3 = !value;
-                                        }else{
-                                          Provider.of<AppState>(context, listen: false)
-                                              .setEatBoolean("False");
-                                          _checkBoxValue1 = value;
-                                          _checkBoxValue2 = value;
-                                          _checkBoxValue3 = value;
-                                        }
-                                      });
-                                    },
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text('점심', style: TextStyle(
-                                    fontSize: 15.0, fontWeight: FontWeight.w700)),
-                                Transform.scale(
-                                  scale: 1.5,
-                                  child: Checkbox(
-                                    activeColor: Colors.white,
-                                    checkColor: Colors.blueAccent,
-                                    value: _checkBoxValue2,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        if(value == true){
-                                          Provider.of<AppState>(context, listen: false)
-                                              .setEatBoolean("True");
-                                          _checkBoxValue1 = !value;
-                                          _checkBoxValue2 = value;
-                                          _checkBoxValue3 = !value;
-                                        }else{
-                                          Provider.of<AppState>(context, listen: false)
-                                              .setEatBoolean("False");
-                                          _checkBoxValue1 = value;
-                                          _checkBoxValue2 = value;
-                                          _checkBoxValue3 = value;
-                                        }
-                                        Provider.of<AppState>(context, listen: false)
-                                            .setEatTime("점심");
-
-                                        _checkBoxValue2 = value;
-                                      });
-                                    },
-                                  ),
-                                ),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text('저녁', style: TextStyle(
-                                    fontSize: 15.0, fontWeight: FontWeight.w700)),
-                                Transform.scale(
-                                  scale: 1.5,
-                                  child: Checkbox(
-                                    activeColor: Colors.white,
-                                    checkColor: Colors.blueAccent,
-                                    value: _checkBoxValue3,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        if(value == true){
-                                          Provider.of<AppState>(context, listen: false)
-                                              .setEatBoolean("True");
-                                          _checkBoxValue1 = !value;
-                                          _checkBoxValue2 = !value;
-                                          _checkBoxValue3 = value;
-                                        }else{
-                                          Provider.of<AppState>(context, listen: false)
-                                              .setEatBoolean("False");
-                                          _checkBoxValue1 = value;
-                                          _checkBoxValue2 = value;
-                                          _checkBoxValue3 = value;
-                                        }
-
-                                        Provider.of<AppState>(context, listen: false)
-                                            .setEatTime("저녁");
-                                        _checkBoxValue3 = value;
-                                      });
-                                    },
-                                  ),
+                                LoadingAnimationWidget.staggeredDotsWave(
+                                  color: Color(0xFF0277BD),
+                                  size: 55,
                                 ),
                               ],
                             )
-                          ])
+                          : Column(children: [
+                              Text(
+                                "기기 착용과",
+                                style: TextStyle(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.w700),
+                                textAlign: TextAlign.center,
+                              ),
+                              Text(
+                                "체크 박스 선택 후",
+                                style: TextStyle(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.w700),
+                                textAlign: TextAlign.center,
+                              ),
+                              Text(
+                                "시작 버튼을 터치하세요",
+                                style: TextStyle(
+                                    fontSize: 18.0,
+                                    fontWeight: FontWeight.w700),
+                                textAlign: TextAlign.center,
+                              ),
+                              SizedBox(height: 35),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text('아침',
+                                      style: TextStyle(
+                                          fontSize: 15.0,
+                                          fontWeight: FontWeight.w700)),
+                                  Transform.scale(
+                                    scale: 1.5,
+                                    child: Checkbox(
+                                      activeColor: Colors.white,
+                                      checkColor: Colors.blueAccent,
+                                      value: _checkBoxValue1,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          Provider.of<AppState>(context,
+                                                  listen: false)
+                                              .setEatTime("아침");
+
+                                          if (value == true) {
+                                            // 체크 박스 하나만 체크되도록 if문 설정
+                                            Provider.of<AppState>(context,
+                                                    listen: false)
+                                                .setEatBoolean("True");
+                                            _checkBoxValue1 = value;
+                                            _checkBoxValue2 = !value;
+                                            _checkBoxValue3 = !value;
+                                          } else {
+                                            Provider.of<AppState>(context,
+                                                    listen: false)
+                                                .setEatBoolean("False");
+                                            _checkBoxValue1 = value;
+                                            _checkBoxValue2 = value;
+                                            _checkBoxValue3 = value;
+                                          }
+                                        });
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text('점심',
+                                      style: TextStyle(
+                                          fontSize: 15.0,
+                                          fontWeight: FontWeight.w700)),
+                                  Transform.scale(
+                                    scale: 1.5,
+                                    child: Checkbox(
+                                      activeColor: Colors.white,
+                                      checkColor: Colors.blueAccent,
+                                      value: _checkBoxValue2,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          if (value == true) {
+                                            Provider.of<AppState>(context,
+                                                    listen: false)
+                                                .setEatBoolean("True");
+                                            _checkBoxValue1 = !value;
+                                            _checkBoxValue2 = value;
+                                            _checkBoxValue3 = !value;
+                                          } else {
+                                            Provider.of<AppState>(context,
+                                                    listen: false)
+                                                .setEatBoolean("False");
+                                            _checkBoxValue1 = value;
+                                            _checkBoxValue2 = value;
+                                            _checkBoxValue3 = value;
+                                          }
+                                          Provider.of<AppState>(context,
+                                                  listen: false)
+                                              .setEatTime("점심");
+
+                                          _checkBoxValue2 = value;
+                                        });
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text('저녁',
+                                      style: TextStyle(
+                                          fontSize: 15.0,
+                                          fontWeight: FontWeight.w700)),
+                                  Transform.scale(
+                                    scale: 1.5,
+                                    child: Checkbox(
+                                      activeColor: Colors.white,
+                                      checkColor: Colors.blueAccent,
+                                      value: _checkBoxValue3,
+                                      onChanged: (value) {
+                                        setState(() {
+                                          if (value == true) {
+                                            Provider.of<AppState>(context,
+                                                    listen: false)
+                                                .setEatBoolean("True");
+                                            _checkBoxValue1 = !value;
+                                            _checkBoxValue2 = !value;
+                                            _checkBoxValue3 = value;
+                                          } else {
+                                            Provider.of<AppState>(context,
+                                                    listen: false)
+                                                .setEatBoolean("False");
+                                            _checkBoxValue1 = value;
+                                            _checkBoxValue2 = value;
+                                            _checkBoxValue3 = value;
+                                          }
+
+                                          Provider.of<AppState>(context,
+                                                  listen: false)
+                                              .setEatTime("저녁");
+                                          _checkBoxValue3 = value;
+                                        });
+                                      },
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ])
                       : isLoading == true
                           ? Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                LoadingAnimationWidget.hexagonDots(
+                                LoadingAnimationWidget.staggeredDotsWave(
                                   color: Color(0xFF0277BD),
                                   size: 55,
                                 ),
@@ -429,15 +451,19 @@ class _MyWidgetState extends State<MyWidget> {
                     "False"
                 ? Column(children: [
                     Provider.of<AppState>(context, listen: false)
-                                .getBlueConnectStatus ==
-                            "False" || Provider.of<AppState>(context, listen: false)
-                .getEatBoolean == "False"
+                                    .getBlueConnectStatus ==
+                                "False" ||
+                            Provider.of<AppState>(context, listen: false)
+                                    .getEatBoolean ==
+                                "False"
                         ? IconButton(
                             onPressed: () {
-                              if(Provider.of<AppState>(context, listen: false)
-                                  .getBlueConnectStatus ==
-                                  "False" && Provider.of<AppState>(context, listen: false)
-                                  .getEatBoolean == "False"){
+                              if (Provider.of<AppState>(context, listen: false)
+                                          .getBlueConnectStatus ==
+                                      "False" &&
+                                  Provider.of<AppState>(context, listen: false)
+                                          .getEatBoolean ==
+                                      "False") {
                                 ScaffoldMessenger.of(context)
                                     .showSnackBar(SnackBar(
                                   content: Text(
@@ -451,10 +477,13 @@ class _MyWidgetState extends State<MyWidget> {
                                   backgroundColor: Color(0xffB3E5FC),
                                   duration: Duration(milliseconds: 1500),
                                 ));
-                              }else if(Provider.of<AppState>(context, listen: false)
-                                  .getBlueConnectStatus ==
-                                  "False" && Provider.of<AppState>(context, listen: false)
-                                  .getEatBoolean == "True"){
+                              } else if (Provider.of<AppState>(context,
+                                              listen: false)
+                                          .getBlueConnectStatus ==
+                                      "False" &&
+                                  Provider.of<AppState>(context, listen: false)
+                                          .getEatBoolean ==
+                                      "True") {
                                 ScaffoldMessenger.of(context)
                                     .showSnackBar(SnackBar(
                                   content: Text(
@@ -468,10 +497,13 @@ class _MyWidgetState extends State<MyWidget> {
                                   backgroundColor: Color(0xffB3E5FC),
                                   duration: Duration(milliseconds: 1500),
                                 ));
-                              }else if(Provider.of<AppState>(context, listen: false)
-                                  .getBlueConnectStatus !=
-                                  "False" && Provider.of<AppState>(context, listen: false)
-                                  .getEatBoolean == "False"){
+                              } else if (Provider.of<AppState>(context,
+                                              listen: false)
+                                          .getBlueConnectStatus !=
+                                      "False" &&
+                                  Provider.of<AppState>(context, listen: false)
+                                          .getEatBoolean ==
+                                      "False") {
                                 ScaffoldMessenger.of(context)
                                     .showSnackBar(SnackBar(
                                   content: Text(
@@ -486,16 +518,13 @@ class _MyWidgetState extends State<MyWidget> {
                                   duration: Duration(milliseconds: 1500),
                                 ));
                               }
-
-
                             },
                             icon: Icon(Icons.play_arrow_rounded),
                             color: Colors.blueAccent,
                             iconSize: 50.0)
                         : IconButton(
                             onPressed: () {
-
-                              rightButtonPressed();   // 스탑워치 시작
+                              rightButtonPressed(); // 스탑워치 시작
                               loading_start();
                               Provider.of<AppState>(context, listen: false)
                                   .setConnectStatus("True");
@@ -514,13 +543,50 @@ class _MyWidgetState extends State<MyWidget> {
                     Column(children: [
                       IconButton(
                           onPressed: () {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text(
+                                      '${Provider.of<AppState>(context, listen: false).getEatTime}식사 완료',
+                                      // textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color: Colors.blue[50],
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                    SizedBox(height: 10),
+                                    Text(
+                                      '저작횟수 : ${Provider.of<AppState>(context, listen: false).getCountNumber}회',
+                                      // textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color: Colors.cyan[50],
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                    SizedBox(height: 10),
+                                    Text(
+                                      '식사시간 : ${Provider.of<AppState>(context, listen: false).getEatMinute}',
+                                      // textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color: Colors.teal[50],
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                  ]),
+                              // backgroundColor: Color(0xffB3E5FC),
+                              behavior: SnackBarBehavior.floating,
+                              width: 300,
+                              backgroundColor: Colors.lightBlue[500],
+                              duration: Duration(milliseconds: 4500),
+                            ));
                             isLoading = true;
                             loading_end();
                             Provider.of<AppState>(context, listen: false)
                                 .setEatBoolean("False");
                             Provider.of<AppState>(context, listen: false)
                                 .setEatTime("");
-                            _checkBoxValue1 = false;  // 체크박스 초기화
+                            _checkBoxValue1 = false; // 체크박스 초기화
                             _checkBoxValue2 = false;
                             _checkBoxValue3 = false;
                             Provider.of<AppState>(context, listen: false)

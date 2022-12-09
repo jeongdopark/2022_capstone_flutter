@@ -16,23 +16,36 @@ class AppState with ChangeNotifier {
   int _countNumber = 0;
   int get getCountNumber => _countNumber;
 
-  String _eatTime = "";    // 아침 점심 저녁 식사 시간 설정
+  String _eatTime = ""; // 아침 점심 저녁 식사 시간 설정
   String get getEatTime => _eatTime;
 
-  String _eatBoolean = "False";    // 체크박스 체크 여부
+  String _eatBoolean = "False"; // 체크박스 체크 여부
   String get getEatBoolean => _eatBoolean;
 
-  void setEatBoolean(String text) {     // 식사 시간 설정
+  String _eatMinute = ""; // 식사 시간 측정한 분단위
+  String get getEatMinute => _eatMinute;
+
+  void setEatBoolean(String text) {
+    // 식사 시간 설정
     _eatBoolean = text;
     notifyListeners();
   }
 
-  void setEatTime(String text) {     // 식사 시간 설정
+  void setEatMinute(String text) {
+    // 식사 시간 측정한 분단위
+    // 식사 시간 설정
+    _eatMinute = text;
+    notifyListeners();
+  }
+
+  void setEatTime(String text) {
+    // 식사 시간 설정
     _eatTime = text;
     notifyListeners();
   }
 
-  void setCountNumber(int number) {     // 저작운동 횟수 측정
+  void setCountNumber(int number) {
+    // 저작운동 횟수 측정
     _countNumber = number;
     notifyListeners();
   }

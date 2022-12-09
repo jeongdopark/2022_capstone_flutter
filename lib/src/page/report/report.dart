@@ -13,7 +13,7 @@ class report_page extends StatefulWidget {
 
 class _report_pageState extends State<report_page> {
   int currentPos = 0;
-  final listPaths = [week_report(), TableBasicsExample(), Month_line()];
+  final listPaths = [week_report(), TableBasicsExample()];
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class _report_pageState extends State<report_page> {
                     // decoration:
                     //     BoxDecoration(borderRadius: BorderRadius.circular(10)),
                     width: 350,
-                    height: 500,
+                    height: 550,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30),
                         color: const Color(0xffF0F0F0)),
@@ -39,7 +39,7 @@ class _report_pageState extends State<report_page> {
                         CarouselSlider.builder(
                             itemCount: listPaths.length,
                             options: CarouselOptions(
-                                height: 450,
+                                height: 500,
                                 viewportFraction: 1,
                                 onPageChanged: (index, reason) {
                                   setState(() {
