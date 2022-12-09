@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:capstone_design_flutter/src/page/report/utils.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'dart:collection';
 
 class TableBasicsExample extends StatefulWidget {
   @override
@@ -20,16 +21,17 @@ class _TableBasicsExampleState extends State<TableBasicsExample> {
   final firestore = FirebaseFirestore.instance;
 
   getData() async {
-    var result =
-        await firestore.collection('dates').doc('KSOTVl6Wy3aynOzfOQSV').get();
-    print(result.data());
+    var result = await firestore.collection('dates').get();
+    print(result);
   }
 
   @override
   void initState() {
     super.initState();
-
-    getData();
+    // print('test------');
+    // print(events);
+    // getData();
+    // print('test------');
 
     _selectedDay = _focusedDay;
     _selectedEvents = ValueNotifier(_getEventsForDay(_selectedDay));
@@ -46,8 +48,19 @@ class _TableBasicsExampleState extends State<TableBasicsExample> {
       Event('아침, 저작횟수:82회, 식사시간:52분'),
       Event('점심, 저작횟수:90회, 식사시간:30분')
     ],
-    DateTime.utc(2022, 12, 14): [Event('아침, 저작횟수:95회, 식사시간:35분')],
+    DateTime.utc(2022, 12, 1): [
+      Event('아침, 저작횟수:82회, 식사시간:52분'),
+      Event('점심, 저작횟수:90회, 식사시간:30분')
+    ],
   };
+
+  // Map<DateTime, List<Event>> events = {
+  //   DateTime.utc(2022, 12, 13): [
+  //     Event('아침, 저작횟수:82회, 식사시간:52분'),
+  //     Event('점심, 저작횟수:90회, 식사시간:30분')
+  //   ],
+  //   DateTime.utc(2022, 12, 14): [Event('아침, 저작횟수:95회, 식사시간:35분')],
+  // };
 
   List<Event> _getEventsForDay(DateTime day) {
     return events[day] ?? [];
@@ -71,6 +84,11 @@ class _TableBasicsExampleState extends State<TableBasicsExample> {
 
   @override
   Widget build(BuildContext context) {
+    events[DateTime.utc(2022, 12, 18)] = [
+      Event('아침, 저작횟수:82회, 식사시간:52분'),
+      Event('점심, 저작횟수:90회, 식사시간:30분')
+    ];
+
     return Scaffold(
         appBar: PreferredSize(
             preferredSize: Size.fromHeight(19),
@@ -80,26 +98,29 @@ class _TableBasicsExampleState extends State<TableBasicsExample> {
         body: Container(
             child: Column(
           children: [
-            TableCalendar(
-              onDaySelected: _onDaySelected,
-              firstDay: kFirstDay,
-              lastDay: kLastDay,
-              focusedDay: _focusedDay,
-              calendarFormat: _calendarFormat,
-              eventLoader: _getEventsForDay,
-              selectedDayPredicate: (day) {
-                return isSameDay(_selectedDay, day);
-              },
-              onFormatChanged: (format) {
-                if (_calendarFormat != format) {
-                  setState(() {
-                    _calendarFormat = format;
-                  });
-                }
-              },
-              onPageChanged: (focusedDay) {
-                _focusedDay = focusedDay;
-              },
+            Card(
+              margin: const EdgeInsets.all(15.0),
+              child: TableCalendar(
+                onDaySelected: _onDaySelected,
+                firstDay: kFirstDay,
+                lastDay: kLastDay,
+                focusedDay: _focusedDay,
+                calendarFormat: _calendarFormat,
+                eventLoader: _getEventsForDay,
+                selectedDayPredicate: (day) {
+                  return isSameDay(_selectedDay, day);
+                },
+                onFormatChanged: (format) {
+                  if (_calendarFormat != format) {
+                    setState(() {
+                      _calendarFormat = format;
+                    });
+                  }
+                },
+                onPageChanged: (focusedDay) {
+                  _focusedDay = focusedDay;
+                },
+              ),
             ),
             Expanded(
               child: ValueListenableBuilder<List<Event>>(
