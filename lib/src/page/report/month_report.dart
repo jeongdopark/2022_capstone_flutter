@@ -17,12 +17,20 @@ class Event {
 
 class _TableBasicsExampleState extends State<TableBasicsExample> {
   ValueNotifier<List<Event>> _selectedEvents;
-
+  var get_fire_store_data_date;
   final firestore = FirebaseFirestore.instance;
 
   getData() async {
     var result = await firestore.collection('dates').get();
-    print(result);
+    get_fire_store_data_date = result.docs;
+    // print(get_fire_store_data_date);
+    // get_fire_store_data_date.forEach((e) async {
+    //   // print(e.data)
+    //   print(e.id);
+    //   var detail_result =
+    //       await firestore.collection('dates').doc('${e.id}').get();
+    //   print(detail_result.data());
+    // });
   }
 
   @override
@@ -30,7 +38,7 @@ class _TableBasicsExampleState extends State<TableBasicsExample> {
     super.initState();
     // print('test------');
     // print(events);
-    // getData();
+    getData();
     // print('test------');
 
     _selectedDay = _focusedDay;
@@ -45,15 +53,21 @@ class _TableBasicsExampleState extends State<TableBasicsExample> {
 
   Map<DateTime, List<Event>> events = {
     DateTime.utc(2022, 12, 13): [
-      Event('아침, 저작횟수:82회, 식사시간:52분'),
-      Event('점심, 저작횟수:90회, 식사시간:30분')
+      Event('아침, 저작횟수:4회, 식사시간:8분'),
+      Event('점심, 저작횟수:6회, 식사시간:10분')
     ],
     DateTime.utc(2022, 12, 1): [
-      Event('아침, 저작횟수:82회, 식사시간:52분'),
-      Event('점심, 저작횟수:90회, 식사시간:30분')
+      Event('아침, 저작횟수:1회, 식사시간:12분'),
+      Event('점심, 저작횟수:3회, 식사시간:15분')
     ],
   };
 
+  void setDateTime(year, month, date, eat_slot, eat_info) {
+    // firebase에 등록된 정보를 Map에 저장해주는 함수
+    events[DateTime.utc(year, month, date)] = [
+      Event('${eat_slot}, ${eat_info}')
+    ];
+  }
   // Map<DateTime, List<Event>> events = {
   //   DateTime.utc(2022, 12, 13): [
   //     Event('아침, 저작횟수:82회, 식사시간:52분'),
@@ -73,9 +87,11 @@ class _TableBasicsExampleState extends State<TableBasicsExample> {
         _focusedDay = focusedDay;
       });
 
-      _selectedEvents.value = _getEventsForDay(selectedDay);
+      _selectedEvents.value =
+          _getEventsForDay(selectedDay); // _selectedEvents.value에 그날의 정보가 들어있다.
+
+      // _selectedEvents.value.forEach((element) => {print(element.title)});
     }
-    print(_selectedEvents.value);
   }
 
   CalendarFormat _calendarFormat = CalendarFormat.month;
@@ -84,10 +100,39 @@ class _TableBasicsExampleState extends State<TableBasicsExample> {
 
   @override
   Widget build(BuildContext context) {
-    events[DateTime.utc(2022, 12, 18)] = [
-      Event('아침, 저작횟수:82회, 식사시간:52분'),
-      Event('점심, 저작횟수:90회, 식사시간:30분')
-    ];
+    // events[DateTime.utc(2022, 12, 18)] = [
+    //   Event('아침, 저작횟수:82회, 식사시간:52분'),
+    //   Event('점심, 저작횟수:90회, 식사시간:30분')
+    // ];
+    // get_fire_store_data_date?.forEach((e) {
+    //   var year_data = int.parse(e.id.substring(0, 4));
+    //   var month_data = int.parse(e.id.substring(5, 7));
+    //   var date_data = int.parse(e.id.substring(8, 10));
+    //   // print(year_data);
+    //   // print(month_data);
+    //   // print(date_data);
+    // });
+    // void setDateTime(year, month, date, eat_slot, eat_count, eat_time) {
+    //   // firebase에 등록된 정보를 Map에 저장해주는 함수
+    //   events[DateTime.utc(year, month, date)] = [
+    //     Event('${eat_slot}, 저작횟수:${eat_count}, 식사시간:${eat_time}')
+    //   ];
+    // }
+    get_fire_store_data_date?.forEach((e) async {
+      var year_data = int.parse(e.id.substring(0, 4));
+      var month_data = int.parse(e.id.substring(5, 7));
+      var date_data = int.parse(e.id.substring(8, 10));
+      print(e.id);
+      var detail_result =
+          await firestore.collection('dates').doc('${e.id}').get();
+      detail_result.data().forEach((key, value) {
+        setDateTime(year_data, month_data, date_data, key, value);
+        print(events);
+      });
+    });
+
+    // print(events);
+    // getData();
 
     return Scaffold(
         appBar: PreferredSize(
