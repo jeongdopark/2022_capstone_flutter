@@ -3,6 +3,8 @@ import '../test2/communication.dart';
 import 'package:capstone_design_flutter/src/provider/provider_count.dart';
 import 'package:provider/provider.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'dart:async';
 
 // StatelessWidget은 변화지 않는 화면을 작업할 때 사용.
@@ -543,6 +545,18 @@ class _MyWidgetState extends State<MyWidget> {
                     Column(children: [
                       IconButton(
                           onPressed: () {
+                            var _toDay = DateTime.now().toString();
+                            var _year = _toDay.substring(0, 4);
+                            var _month = _toDay.substring(5, 7);
+                            var _date = _toDay.substring(8, 10);
+
+                            FirebaseFirestore.instance
+                                .collection("dates")
+                                .doc("${_year},${_month},${_date}")
+                                .set({
+                              "${Provider.of<AppState>(context, listen: false).getEatTime}":
+                                  "저작횟수:${Provider.of<AppState>(context, listen: false).getCountNumber}회, 식사시간:${Provider.of<AppState>(context, listen: false).getEatMinute}분"
+                            }, SetOptions(merge: true));
                             ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                               content: Column(
                                   mainAxisSize: MainAxisSize.min,
