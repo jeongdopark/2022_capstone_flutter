@@ -62,12 +62,28 @@ class _TableBasicsExampleState extends State<TableBasicsExample> {
     // ],
   };
 
-  // void setDateTime(year, month, date, eat_slot, eat_info) {
-  //   // firebase에 등록된 정보를 Map에 저장해주는 함수
-  //   events[DateTime.utc(year, month, date)] = [
-  //     Event('${eat_slot}: ${eat_info}')
-  //   ];
-  // }
+  void setDateTime(year, month, date, eat_slot, eat_info) {
+    // firebase에 등록된 정보를 Map에 저장해주는 함수
+    bool valid = true;
+    if (events.containsKey(DateTime.utc(year, month, date))) {
+      events[DateTime.utc(year, month, date)].forEach((e) => {
+            // print('---------'),
+            // print(e.title),
+            // print(Event('${eat_slot}: ${eat_info}').title),
+            // print(e.title == Event('${eat_slot}: ${eat_info}').title),
+            if (e.title == Event('${eat_slot}: ${eat_info}').title)
+              {valid = false}
+          });
+      if (valid == true) {
+        events[DateTime.utc(year, month, date)]
+            .add(Event('${eat_slot}: ${eat_info}'));
+      }
+    } else {
+      events[DateTime.utc(year, month, date)] = [
+        Event('${eat_slot}: ${eat_info}')
+      ];
+    }
+  }
   // Map<DateTime, List<Event>> events = {
   //   DateTime.utc(2022, 12, 13): [
   //     Event('아침, 저작횟수:82회, 식사시간:52분'),
@@ -123,13 +139,13 @@ class _TableBasicsExampleState extends State<TableBasicsExample> {
       var month_data = int.parse(e.id.substring(5, 7));
       var date_data = int.parse(e.id.substring(8, 10));
       print(e.id);
-      events[DateTime.utc(year_data, month_data, date_data)] = [];
+      // events[DateTime.utc(year_data, month_data, date_data)] = [];
       var detail_result =
           await firestore.collection('dates').doc('${e.id}').get();
       detail_result.data().forEach((key, value) {
-        events[DateTime.utc(year_data, month_data, date_data)]
-            .add(Event('${key}: ${value}'));
-        // setDateTime(year_data, month_data, date_data, key, value);
+        // events[DateTime.utc(year_data, month_data, date_data)]
+        //     .add(Event('${key}: ${value}'));
+        setDateTime(year_data, month_data, date_data, key, value);
       });
     });
 
