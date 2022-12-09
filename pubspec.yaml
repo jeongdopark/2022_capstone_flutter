@@ -45,6 +45,7 @@ dependencies:
   cloud_firestore: ^4.1.0
   neon_circular_timer: ^0.0.7
   loading_animation_widget: ^1.2.0+3
+  firebase_core: ^2.4.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

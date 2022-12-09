@@ -1,6 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:capstone_design_flutter/src/page/report/utils.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class TableBasicsExample extends StatefulWidget {
   @override
@@ -15,9 +17,19 @@ class Event {
 class _TableBasicsExampleState extends State<TableBasicsExample> {
   ValueNotifier<List<Event>> _selectedEvents;
 
+  final firestore = FirebaseFirestore.instance;
+
+  getData() async {
+    var result =
+        await firestore.collection('dates').doc('KSOTVl6Wy3aynOzfOQSV').get();
+    print(result.data());
+  }
+
   @override
   void initState() {
     super.initState();
+
+    getData();
 
     _selectedDay = _focusedDay;
     _selectedEvents = ValueNotifier(_getEventsForDay(_selectedDay));

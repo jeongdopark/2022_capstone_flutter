@@ -7,11 +7,15 @@ import 'package:capstone_design_flutter/src/page/test2/MainPage.dart';
 import 'package:capstone_design_flutter/src/page/test2/ChatPage.dart';
 import 'package:capstone_design_flutter/src/provider/provider_count.dart';
 import 'package:capstone_design_flutter/src/page/test_page.dart';
-
+import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
 
-void main() => runApp(Test());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(Test());
+}
 
 class Test extends StatelessWidget {
   // This widget is the root of your application.
