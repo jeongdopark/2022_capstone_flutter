@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:provider/provider.dart';
+import 'package:app_state/app_state.dart';
 
 class week_report extends StatefulWidget {
   const week_report({Key key}) : super(key: key);
@@ -41,14 +43,15 @@ class _MyHomePageState extends State<_MyHomePage> {
   @override
   void initState() {
     data = [
-      _ChartData('Mon', 20),
-      _ChartData('Tue', 15),
-      _ChartData('Wed', 12),
-      _ChartData('Thur', 15),
-      _ChartData('Fri', 12),
-      _ChartData('Sat', 15),
-      _ChartData('Sun', 15),
+      _ChartData('12/10 아침', 340),
+      _ChartData('12/10 점심', 420),
+      _ChartData('12/10 저녁', 255),
+      _ChartData('12/11 아침', 340),
+      _ChartData('12/11 점심', 430),
+      _ChartData('12/11 저녁', 250),
+      _ChartData('12/12 아침', 280),
     ];
+    // data = Provider.of<AppState>(context, listen: false).getMealData;
     _tooltip = TooltipBehavior(enable: true);
     super.initState();
   }
@@ -59,20 +62,20 @@ class _MyHomePageState extends State<_MyHomePage> {
           preferredSize: Size.fromHeight(15),
           child: AppBar(
             title: const Text(
-              'Weekly Report',
+              'Last 7 Meals Report',
             ),
           ),
         ),
         body: SfCartesianChart(
             primaryXAxis: CategoryAxis(),
-            primaryYAxis: NumericAxis(minimum: 0, maximum: 30, interval: 10),
+            primaryYAxis: NumericAxis(minimum: 0, maximum: 650, interval: 50),
             tooltipBehavior: _tooltip,
             series: <ChartSeries<_ChartData, String>>[
               ColumnSeries<_ChartData, String>(
                   dataSource: data,
                   xValueMapper: (_ChartData data, _) => data.x,
                   yValueMapper: (_ChartData data, _) => data.y,
-                  name: 'Gold',
+                  name: '저작횟수',
                   color: Color.fromRGBO(8, 142, 255, 1))
             ]));
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:capstone_design_flutter/src/page/test2/MainPage.dart';
+import 'package:capstone_design_flutter/src/page/profile/main.dart';
 
 class Mypage extends StatelessWidget {
   const Mypage({Key key}) : super(key: key);
@@ -20,13 +21,14 @@ class Mypage extends StatelessWidget {
             SizedBox(height: 30),
             GestureDetector(
               onTap: () {
-                print("hello");
+                Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => Profile()));
               },
               child: Row(
                 children: [
                   Icon(Icons.account_circle),
                   SizedBox(width: 15),
-                  Text("프로필 수정", style: TextStyle(fontSize: 20))
+                  Text("프로필", style: TextStyle(fontSize: 20))
                 ],
               ),
             ),
@@ -56,7 +58,7 @@ class Mypage extends StatelessWidget {
                 children: [
                   Icon(Icons.bluetooth_rounded),
                   SizedBox(width: 15),
-                  Text("기기 변경", style: TextStyle(fontSize: 20))
+                  Text("블루투스", style: TextStyle(fontSize: 20))
                 ],
               ),
             ),

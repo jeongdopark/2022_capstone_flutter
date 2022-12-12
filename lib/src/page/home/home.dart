@@ -48,6 +48,7 @@ class TimerTextState extends State<TimerText> {
   @override
   void initState() {
     print("initState");
+
     timer = new Timer.periodic(
         new Duration(milliseconds: dependencies.timerMillisecondsRefreshRate),
         callback);
@@ -427,7 +428,6 @@ class _MyWidgetState extends State<MyWidget> {
                             )
                           : Column(
                               children: [
-                                SizedBox(height: 20),
                                 Text(
                                     '${context.watch<AppState>().getCountNumber}',
                                     style: TextStyle(
@@ -439,7 +439,19 @@ class _MyWidgetState extends State<MyWidget> {
                                     new TimerText(dependencies: dependencies),
                                   ],
                                 ),
-                                SizedBox(height: 40),
+                                SizedBox(height: 30),
+                                Text("1. 꼭꼭 씹기",
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.redAccent)),
+                                SizedBox(height: 5),
+                                Text("2. 20회 이상 씹기",
+                                    style: TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.redAccent)),
+                                SizedBox(height: 20),
                                 LoadingAnimationWidget.horizontalRotatingDots(
                                   color: Color(0xFF0277BD),
                                   // rightDotColor: const Color(0xFF448AFF),
@@ -590,7 +602,7 @@ class _MyWidgetState extends State<MyWidget> {
                                   ]),
                               // backgroundColor: Color(0xffB3E5FC),
                               behavior: SnackBarBehavior.floating,
-                              width: 300,
+                              width: 200,
                               backgroundColor: Colors.lightBlue[500],
                               duration: Duration(milliseconds: 4500),
                             ));

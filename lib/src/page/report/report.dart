@@ -3,12 +3,13 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:capstone_design_flutter/src/page/report/week_report.dart';
 import 'package:capstone_design_flutter/src/page/report/month_report.dart';
 import 'package:capstone_design_flutter/src/page/report/month_line_chart.dart';
+import 'package:provider/provider.dart';
 
 class report_page extends StatefulWidget {
   const report_page({Key key}) : super(key: key);
 
   @override
-  State<report_page> createState() => _report_pageState();
+  State<report_page> createState() => (_report_pageState());
 }
 
 class _report_pageState extends State<report_page> {

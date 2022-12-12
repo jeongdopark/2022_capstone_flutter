@@ -140,8 +140,8 @@ class _ChatPage extends State<ChatPage> with ChangeNotifier {
           title: (isConnecting
               ? Text('Connecting chat to ' + widget.server.name + '...')
               : isConnected
-                  ? Text('Live chat with ' + widget.server.name)
-                  : Text('Chat log with ' + widget.server.name))),
+                  ? Text('블루투스 연결 양호 : ' + widget.server.name)
+                  : Text('블루투스 연결이 끊겼습니다. ' + widget.server.name))),
       bottomNavigationBar: Container(
         // margin: EdgeInsets.all(displayWidth * .05),
         height: displayWidth * .155,

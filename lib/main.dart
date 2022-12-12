@@ -10,6 +10,7 @@ import 'package:capstone_design_flutter/src/page/test_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/services.dart';
+import 'package:capstone_design_flutter/src/page/profile/main.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -47,7 +48,7 @@ class _MyAppState extends State<MyApp> {
     Home(),
     report_page(),
     Mypage(),
-    ChatPage(),
+    // ChatPage(),
   ];
 
   // This widget is the root of your application.
@@ -70,7 +71,7 @@ class _MyAppState extends State<MyApp> {
                 color: Colors.white,
               ),
               child: ListView.builder(
-                itemCount: 4,
+                itemCount: 3, // 네비게이션바 개수
                 scrollDirection: Axis.horizontal,
                 padding: EdgeInsets.symmetric(horizontal: displayWidth * .02),
                 itemBuilder: (context, index) => InkWell(
@@ -183,12 +184,10 @@ List<String> listOfStrings = [
   'Home',
   'Report',
   'Setting',
-  'BlT',
 ];
 
 List<IconData> listOfIcons = [
   Icons.restaurant,
   Icons.bar_chart_rounded,
   Icons.settings_rounded,
-  Icons.bluetooth_rounded,
 ];
