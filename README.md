@@ -44,14 +44,16 @@
 <a href='https://ifh.cc/v-26Ov0s' target='_blank'><img src='https://ifh.cc/g/26Ov0s.png' border='0'></a>
 </br>
 
-## 저작 횟수 측정 시작 전 화면의 구성은 식사시간을 선택할 수 있는 체크박스와 저작 횟수 측정 시작버튼으로 구성되어 있다.
+저작 횟수 측정 시작 전 화면의 구성은 식사시간을 선택할 수 있는 체크박스와 저작 횟수 측정 시작버튼으로 구성되어 있다.
+
 ---
 <br>
 
 ## 저작횟수 측정 화면
 <br>
 <a href='https://ifh.cc/v-ggrcAO' target='_blank'><img src='https://ifh.cc/g/ggrcAO.png' border='0'></a>
-
+저작 횟수 측정 시작 후 화면의 구성은 저작 운동 횟수와 식사 시간을 측정해주는 위젯과 식사 종료 버튼으로 구성되어 있다.
+식사 종료 버튼을 누르면 측정된 저작 횟수와 식사시간은 Firebase 저장소에 저장된다.
 <br>
 
 ---
@@ -60,3 +62,5 @@
 ## 레포트 페이지
 
 <a href='https://ifh.cc/v-hGpSxc' target='_blank'><img src='https://ifh.cc/g/hGpSxc.jpg' border='0'></a>
+
+레포트 화면은 가장 최근 일곱 끼니에 대한 데이터를 그래프로 시각화한 위젯과 달력 형태로 원하는 날짜에 데이터를 조회할 수 있는 위젯으로 구성되어 있다
